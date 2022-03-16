@@ -1,0 +1,13 @@
+{
+    "scripts": {
+        "prerelease": "touch temp_version.txt",
+        "postbump": "poetry version v$(cat temp_version.txt) && git add pyproject.toml",
+        "postcommit": "export TEMP_VERSION=v$(cat temp_version.txt) && rm temp_version.txt && git add . && git commit -m \"chore(release): $TEMP_VERSION\""
+    },
+    "bumpFiles": [
+        {
+            "filename": "temp_version.txt",
+            "type": "plain-text"
+        }
+    ]
+}
